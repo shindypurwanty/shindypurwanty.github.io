@@ -41,7 +41,6 @@
         </div>
     </nav>
 
-    <script src="script.js"></script>
     <!-- Akhir Navbar -->
 
     <!-- Hero -->
@@ -161,15 +160,15 @@
       <div class="contact">
         <div class="ct-bg">
           <h2>Contact Me</h2>
-          <form class="ct-form">
+          <form name="submit-to-google-sheet" class="ct-form">
           <form action="https://docs.google.com/spreadsheets/d/1TmWInQZ8u9jbLVem6WatJRs1JCRSEtImTOMeM68eEEs/edit?gid=0#gid=0" method="post">
 
             <label>Nama Lengkap</label>
-            <input type="text" placeholder="Masukkan nama" required>
+            <input type="text" name="nama" placeholder="Masukkan nama" required>
             <label>Email</label>
-            <input type="text" placeholder="Masukkan email" required>
+            <input type="text" name="email" placeholder="Masukkan email" required>
             <label>Pesan</label>
-            <textarea type="text" placeholder="Tulis Pesan..." rows="4" required></textarea>
+            <textarea type="text" name="pesan" placeholder="Tulis Pesan..." rows="4" required></textarea>
             <button type="submit">Kirim</button>
           </form>
           </form>
@@ -178,6 +177,19 @@
      </section>
 
     <!-- Akhir Contact -->
+     <script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbwjRwJLVLAGRfV4ng5C4ecCCEdVbz0np9pAJ18zQuFOHEB5a2Yc0zjXJh1Vv2rkTLD-Rg/exec'
+  const form = document.forms['submit-to-google-sheet']
 
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => console.log('Success!', response))
+      .catch(error => console.error('Error!', error.message))
+      form.reset();
+  })
+</script>
+
+ <script src="script.js"></script>
   </body>
 </html>
